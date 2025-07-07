@@ -6,7 +6,7 @@ It gives detailed error messages, including: what the error was, line it occurre
 #The sys module in Python provides access to variables and functions 
 #that interact closely with the Python interpreter and its runtime environment.
 import sys
-
+import logging
 
 def error_message_detail(error,error_detail:sys):
     '''
@@ -14,7 +14,7 @@ def error_message_detail(error,error_detail:sys):
     '''
     _,_,exc_tb=error_detail.exc_info() #gives exception error details
     file_name = exc_tb.tb_frame.f_code.co_filename #get error file name
-    error_message='Error occured in Python script [{0}] line number [{}] error message [{2}]'.format(
+    error_message='Error occured in Python script [{0}] line number [{1}] error message [{2}]'.format(
         file_name, exc_tb.tb_lineno, str(error)
     )
 
@@ -40,3 +40,14 @@ class CustomException(Exception):
         returns the Custom Error Message
         '''
         return self.error_message
+
+# To test the run
+'''
+if __name__ == '__main__':
+    try:
+        a = 1/0
+    except Exception as e:
+        logging.info("Divided by 0")
+        raise CustomException(e,sys)
+'''
+    
