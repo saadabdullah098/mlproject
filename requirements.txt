@@ -4,5 +4,5 @@ seaborn
 matplotlib
 scikit-learn
 catboost --prefer-binary
-xgboost
+#xgboost #install this on the terminal for Macs by running: conda install -c conda-forge xgboost
 #-e . #when this is not commented out, pip install -r requirements.txt will build the entire app
