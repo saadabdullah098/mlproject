@@ -6,7 +6,7 @@ It gives detailed error messages, including: what the error was, line it occurre
 #The sys module in Python provides access to variables and functions 
 #that interact closely with the Python interpreter and its runtime environment.
 import sys
-import logging
+from src.logger import logging
 
 def error_message_detail(error,error_detail:sys):
     '''
@@ -42,12 +42,14 @@ class CustomException(Exception):
         return self.error_message
 
 # To test the run
+
 '''
 if __name__ == '__main__':
     try:
         a = 1/0
     except Exception as e:
-        logging.info("Divided by 0")
-        raise CustomException(e,sys)
+        custom_err = CustomException(e, sys)
+        logging.error(custom_err)
+        raise custom_err
 '''
     
