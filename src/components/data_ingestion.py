@@ -8,11 +8,16 @@ from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
+from src.components.model_trainer import ModelTrainer
+from src.components.model_trainer import ModelTrainerConfig
 
 # Class to define data path variables
 # Use dataclass decorator when only defining variables - it automatically generates the __init__ method
 @dataclass 
 class DataIngestionConfig:
+    '''
+        This class creates the file path for data(s)
+    '''
     raw_data_path: str = os.path.join('artifacts', 'data.csv')
     train_data_path: str = os.path.join('artifacts', 'train.csv')
     test_data_path: str = os.path.join('artifacts', 'test.csv')
@@ -20,10 +25,17 @@ class DataIngestionConfig:
 # Class to initialize data ingestion
 class DataIngestion:
     def __init__(self):
-        # When DataIngestion is initialized, the 3 path variables are saved inside the object of class 
+        '''
+            This function initializes the 3 path variables and are saved inside the object of class
+        '''
         self.ingestion_config = DataIngestionConfig()
 
     def initiate_data_ingestion(self):
+        '''
+            This function initiates data ingestion.
+            Input: raw data as a DataFrame on line 40
+            Output: file path to saved train and test data
+        '''
         logging.info("Entered the data ingestion method or component")
         try:
             # Data can be read from any source
@@ -64,4 +76,7 @@ if __name__ == '__main__':
 
     # Then apply DataTransformation 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data_path, test_data_path)
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data_path, test_data_path)
+
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr, test_arr))

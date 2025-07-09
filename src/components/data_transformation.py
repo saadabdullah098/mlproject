@@ -80,7 +80,9 @@ class DataTransformation:
         
     def initiate_data_transformation(self, train_path, test_path):
         '''
-            This function initiates data transformation
+            This function initiates data transformation.
+            Input: train and test data path (ie. output of data_ingestion.py)
+            Output: Arrays of the train and test transformed data along with the trained preprocessor.pkl file.
         '''
         try:
             train_df = pd.read_csv(train_path)
