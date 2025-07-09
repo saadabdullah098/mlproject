@@ -135,10 +135,10 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.artifacts
 .env
 .envrc
 .myenv
+artifacts/
 env/
 myenv/
 ENV/

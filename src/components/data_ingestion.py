@@ -6,6 +6,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
 # Class to define data path variables
 # Use dataclass decorator when only defining variables - it automatically generates the __init__ method
 @dataclass 
@@ -17,7 +20,7 @@ class DataIngestionConfig:
 # Class to initialize data ingestion
 class DataIngestion:
     def __init__(self):
-        # When DataIngestion is initialized, the 3 path variables be saved inside this class variable
+        # When DataIngestion is initialized, the 3 path variables are saved inside the object of class 
         self.ingestion_config = DataIngestionConfig()
 
     def initiate_data_ingestion(self):
@@ -55,5 +58,10 @@ class DataIngestion:
 
 # Initiate data ingestion        
 if __name__ == '__main__':
+    # First run DataIngestion to read raw data and split it into train and test
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data_path, test_data_path = obj.initiate_data_ingestion()
+
+    # Then apply DataTransformation 
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data_path, test_data_path)
