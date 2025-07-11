@@ -9,7 +9,11 @@ class PredictPipeline:
         pass
 
     def predict(self, features):
-        'This function loads the saved models and uses it make prediction with new data (custom data)'
+        '''
+            This function loads the saved models and uses it make prediction with new data (custom data)
+            Input: new feature data collected from HTML in dataframe format
+            Output: prediction for the new data
+        '''
         
         try: 
             model_path = 'artifact/model.pkl'
@@ -49,7 +53,9 @@ class CustomData:
         self.writing_score = writing_score
 
     def get_data_as_data_frame(self):
-        'This function converts the custom data collected from HTML into a dataframe'
+        '''
+            This function converts the custom data collected from HTML into a dataframe.
+        '''
         try:
             custom_data_input_dict = {
                 "gender": [self.gender],
